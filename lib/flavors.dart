@@ -1,7 +1,4 @@
-enum Flavor {
-  dev,
-  prod,
-}
+enum Flavor { dev, prod }
 
 class F {
   static late final Flavor appFlavor;
@@ -17,4 +14,14 @@ class F {
     }
   }
 
+  static String get weatherIconBasePath {
+    switch (appFlavor) {
+      case Flavor.dev:
+        // Usa íconos 'dev' que pueden ser diferentes (ej. marcas de agua)
+        return 'assets/icons/dev/';
+      case Flavor.prod:
+        // Usa íconos 'prod' limpios
+        return 'assets/icons/prod/';
+    }
+  }
 }

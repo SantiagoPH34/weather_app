@@ -1,0 +1,22 @@
+flavors:
+  dev:
+    app:
+      name: "Weather Dev"
+
+    android:
+      applicationId: "com.example.weather.dev"
+      icon: "assets/icons/dev_icon.png" 
+    ios:
+      bundleId: "com.example.weather.dev"
+      icon: "assets/icons/dev_icon.png"
+  prod:
+    app:
+      name: "Weather App"
+  
+    android:
+      applicationId: "com.example.weather"
+      icon: "assets/icons/prod_icon.png"
+      
+    ios:
+      bundleId: "com.example.weather"
+      icon: "assets/icons/prod_icon.png"

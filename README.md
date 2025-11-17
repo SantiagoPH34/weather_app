@@ -59,6 +59,18 @@ Cada flavor tiene:
 
 ---
 
+## ▶️ Ejecución de cada flavor desde terminal
+
+### **Ejecutar flavor dev**
+```bash
+flutter run --flavor dev -t lib/env/main_dev.dart
+```
+### **Ejecutar flavor prod**
+```bash
+flutter run --flavor dev -t lib/env/prod.dart
+```
+---
+
 ## 🔐 Variables de entorno
 
 Las variables específicas por entorno se gestionan mediante:

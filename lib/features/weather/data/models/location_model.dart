@@ -1,12 +1,7 @@
-import 'dart:convert';
-
 import 'package:weather_app/features/weather/data/models/day_model.dart';
+import 'package:weather_app/features/weather/data/realm_models/weather_models_realm.dart';
+import 'package:weather_app/features/weather/domain/entities/day.dart';
 import 'package:weather_app/features/weather/domain/entities/location.dart';
-
-LocationModel locationFromJson(String str) =>
-    LocationModel.fromJson(json.decode(str));
-
-String locationToJson(LocationModel data) => json.encode(data.toJson());
 
 class LocationModel extends Location {
   LocationModel({
@@ -18,6 +13,7 @@ class LocationModel extends Location {
     required super.timezone,
     required super.tzoffset,
     required super.days,
+    super.currentDay,
   });
 
   factory LocationModel.fromJson(Map<String, dynamic> json) => LocationModel(
@@ -28,17 +24,33 @@ class LocationModel extends Location {
     address: json["address"],
     timezone: json["timezone"],
     tzoffset: json["tzoffset"],
-    days: List<DayModel>.from(json["days"].map((x) => DayModel.fromJson(x))),
+    days: List<Day>.from(json["days"].map((x) => DayModel.fromJson(x))),
+    currentDay: DayModel.fromJson(json["currentConditions"]),
   );
 
-  Map<String, dynamic> toJson() => {
-    "queryCost": queryCost,
-    "latitude": latitude,
-    "longitude": longitude,
-    "resolvedAddress": resolvedAddress,
-    "address": address,
-    "timezone": timezone,
-    "tzoffset": tzoffset,
-    "days": List<DayModel>.from(days.map((x) => x.toJson())),
-  };
+  factory LocationModel.fromRealm(LocationRealm realm) => LocationModel(
+    queryCost: realm.queryCost,
+    latitude: realm.latitude,
+    longitude: realm.longitude,
+    resolvedAddress: realm.resolvedAddress,
+    address: realm.address,
+    timezone: realm.timezone,
+    tzoffset: realm.tzoffset,
+    days: realm.days.map((d) => DayModel.fromRealm(d)).toList(),
+    currentDay: realm.currentDay != null
+        ? DayModel.fromRealm(realm.currentDay!)
+        : null,
+  );
+
+  factory LocationModel.fromDomain(Location location) => LocationModel(
+    queryCost: location.queryCost,
+    latitude: location.latitude,
+    longitude: location.longitude,
+    resolvedAddress: location.resolvedAddress,
+    address: location.address,
+    timezone: location.timezone,
+    tzoffset: location.tzoffset,
+    days: location.days,
+    currentDay: location.currentDay,
+  );
 }

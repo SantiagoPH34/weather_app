@@ -14,6 +14,24 @@ class F {
     }
   }
 
+  static String get apiKey {
+    switch (appFlavor) {
+      case Flavor.dev:
+        return 'SMTCDLYN5X3CMN9KLJKU7ATWV';
+      case Flavor.prod:
+        return 'SMTCDLYN5X3CMN9KLJKU7ATWV';
+    }
+  }
+
+  static String get baseUrl {
+    switch (appFlavor) {
+      case Flavor.dev:
+        return 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/';
+      case Flavor.prod:
+        return 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/';
+    }
+  }
+
   static String get weatherIconBasePath {
     switch (appFlavor) {
       case Flavor.dev:

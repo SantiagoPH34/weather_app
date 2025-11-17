@@ -7,8 +7,9 @@ class Location {
   String resolvedAddress;
   String address;
   String timezone;
-  int tzoffset;
+  double tzoffset;
   List<Day> days;
+  Day? currentDay;
 
   Location({
     required this.queryCost,
@@ -19,5 +20,7 @@ class Location {
     required this.timezone,
     required this.tzoffset,
     required this.days,
+    required this.currentDay,
   });
+  
 }

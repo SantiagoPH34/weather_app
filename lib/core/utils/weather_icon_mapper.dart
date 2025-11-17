@@ -1,50 +1,33 @@
-import 'package:weather_app/flavors.dart';
+import 'package:flutter/material.dart';
 
-class WeatherIconMapper {
-  static const Map<String, String> iconFileNameMap = {
-    // Día/Noche Despejado
-    'clear-day': 'clear-day.svg',
-    'clear-night': 'clear-night.svg',
-
-    // Nublado / Parcialmente Nublado
-    'cloudy': 'cloudy.svg',
-    'partly-cloudy-day': 'partly-cloudy-day.svg',
-    'partly-cloudy-night': 'partly-cloudy-night.svg',
-
-    // Lluvia
-    'rain': 'rain.svg',
-    'showers-day': 'showers-day.svg',
-    'showers-night': 'showers-night.svg',
-
-    // Nieve y Mezclas
-    'snow': 'snow.svg',
-    'sleet': 'sleet.svg', // Aguanieve
-    'hail': 'hail.svg', // Granizo
-    'rain-snow': 'rain-snow.svg',
-    'rain-snow-showers-day': 'rain-snow-showers-day.svg',
-    'rain-snow-showers-night': 'rain-snow-showers-night.svg',
-    'snow-showers-day': 'snow-showers-day.svg',
-    'snow-showers-night': 'snow-showers-night.svg',
-
-    // Tormentas
-    'thunder': 'thunder.svg',
-    'thunder-rain': 'thunder-rain.svg',
-    'thunder-showers-day': 'thunder-showers-day.svg',
-    'thunder-showers-night': 'thunder-showers-night.svg',
-
-    // Otros
-    'fog': 'fog.svg',
-    'wind': 'wind.svg',
-  };
-
-  static String getIconPath(String apiIconName) {
-    final fileName = iconFileNameMap[apiIconName];
-
-    if (fileName == null) {
-      return '${F.weatherIconBasePath}default.svg';
-    }
-
-    // F.weatherIconBasePath devolverá 'assets/icons/dev/' o 'assets/icons/prod/'.
-    return '${F.weatherIconBasePath}$fileName';
+IconData getWeatherIcon(String iconCode) {
+  // Mapeo de códigos de iconos a iconos de Material
+  switch (iconCode.toLowerCase()) {
+    case 'clear-day':
+    case 'sunny':
+      return Icons.wb_sunny;
+    case 'clear-night':
+      return Icons.nightlight_round;
+    case 'rain':
+    case 'showers-day':
+    case 'showers-night':
+      return Icons.umbrella;
+    case 'snow':
+      return Icons.ac_unit;
+    case 'sleet':
+      return Icons.grain;
+    case 'wind':
+      return Icons.air;
+    case 'fog':
+      return Icons.cloud;
+    case 'cloudy':
+      return Icons.cloud_queue;
+    case 'partly-cloudy-day':
+    case 'partly-cloudy-night':
+      return Icons.cloud_circle;
+    case 'thunderstorm':
+      return Icons.flash_on;
+    default:
+      return Icons.wb_cloudy;
   }
 }
